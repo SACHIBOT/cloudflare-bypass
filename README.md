@@ -2,6 +2,12 @@
 
 This project provides a simple Express.js server to bypass Cloudflare bot detection using Puppeteer Extra with the Stealth Plugin. It allows you to fetch and return the HTML content of any webpage by passing the URL as a query parameter.
 
+## Cloudflare Verification Process
+
+![Cloudflare Block Image](https://telegra.ph/file/f90cdb855b640ef8ba3ed.jpg)
+
+The image above shows an example of the Cloudflare verification process that this project can bypass.
+
 ## Features
 
 - **Puppeteer Extra with Stealth Plugin**: Bypasses bot detection mechanisms used by Cloudflare.
