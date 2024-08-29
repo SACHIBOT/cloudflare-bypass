@@ -19,7 +19,7 @@ The image above shows an example of the Cloudflare verification process that thi
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/cloudflare-bypass.git
+   git clone https://github.com/SACHIBOT/cloudflare-bypass.git
    cd cloudflare-bypass
    ```
 
