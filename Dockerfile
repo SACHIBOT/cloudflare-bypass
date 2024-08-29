@@ -1,5 +1,7 @@
 FROM node:18 
-WORKDIR /
-COPY . / 
+WORKDIR /app
+COPY package*.json ./ 
 RUN npm install
-CMD ["npm", "start"]
+COPY . .
+EXPOSE 8000
+CMD ["node", "index.js"]
