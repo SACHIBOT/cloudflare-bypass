@@ -4,6 +4,7 @@
   "description": "Express server to bypass Cloudflare bot detection using Puppeteer Extra and Stealth Plugin",
   "main": "index.js",
   "scripts": {
+    "postinstall":"npx puppeteer browsers install chrome",
     "start": "node index.js"
   },
   "dependencies": {
