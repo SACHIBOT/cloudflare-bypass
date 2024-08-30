@@ -27,7 +27,6 @@ app.get('/', async (req, res) => {
   if (!url) return res.send({ status: false, owner: 'SACHIBOT', err: 'Need site URL!' });
 
   try {
-
     const browser = await puppeteer.launch({
       headless: true,
       args: [
@@ -39,12 +38,23 @@ app.get('/', async (req, res) => {
       ],
     });
 
-
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
-    const html = await page.content();
-
-    await browser.close();
+    let retries = 3;
+    let html;
+    while (retries > 0) {
+      try {
+        const page = await browser.newPage();
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+        html = await page.content();
+        await browser.close();
+        break;
+      } catch (e) {
+        console.error(`Attempt failed. Retries left: ${retries - 1}`);
+        retries--;
+        if (retries === 0) {
+          throw e;
+        }
+      }
+    }
 
     return res.status(200).send(html);
   } catch (e) {
@@ -52,6 +62,7 @@ app.get('/', async (req, res) => {
     res.json({ error: e.message });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
