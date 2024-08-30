@@ -12,40 +12,31 @@ app.use(cookieParser());
 
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
-
-// Function to find cache directories
-function findCacheDirectories() {
-  const homeDir = os.homedir();
-  const cachePaths = [];
-
-  // Common cache directories across different platforms
-  const possibleCacheDirs = [
-    path.join(homeDir, '.cache'),      // Common in Linux and macOS
-    path.join(homeDir, 'AppData', 'Local', 'Temp'),   // Common in Windows
-    path.join(homeDir, 'Library', 'Caches'),  // macOS
-    path.join(homeDir, '.npm'),        // npm cache
-    path.join(homeDir, '.config', 'cache'), // Config cache
-  ];
-
-  possibleCacheDirs.forEach(dir => {
-    if (fs.existsSync(dir)) {
-      cachePaths.push(dir);
+ 
+const rootDir = path.resolve('/'); 
+console.log(__dirname)
+function getFolderPaths(directory) {
+  const folders = [];
+   
+  const items = fs.readdirSync(directory, { withFileTypes: true });
+   
+  items.forEach(item => {
+    if (item.isDirectory()) {
+      const fullPath = path.join(directory, item.name);
+      folders.push(fullPath);
     }
   });
 
-  return cachePaths;
+  return folders;
 }
-
-// Find and print cache directories
-const cacheDirs = findCacheDirectories();
-if (cacheDirs.length > 0) {
-  let msg = 'Cache directories found:\n\n';
-  cacheDirs.forEach(dir => msg+=dir+'\n');
+ 
+const folderPaths = getFolderPaths(rootDir);
+ 
+let msg = 'Next-level folder paths:\n\n'
+folderPaths.forEach(folder => {
+  msg+= folder+ '\n';
+});
 console.log(msg)
-} else {
-  console.log('No cache directories found.');
-}
 
 
 app.get('/', async (req, res) => {
