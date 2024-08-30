@@ -12,7 +12,9 @@ RUN apk update && apk add --no-cache nmap && \
       "freetype>2.8" \
       ttf-freefont \
       nss
-      
+
+RUN apk add chromium
+
 COPY . .
 
 RUN npm install --force 
