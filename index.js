@@ -10,7 +10,7 @@ puppeteer.use(StealthPlugin());
 app.use(express.json());
 app.use(cookieParser());
 
-.eval const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
