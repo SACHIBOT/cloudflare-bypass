@@ -6,21 +6,10 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
 puppeteer.use(StealthPlugin());
-
-const { exec } = require('child_process');
+ 
 app.use(express.json());
 app.use(cookieParser());
 
-
-exec('node node_modules/puppeteer/install.mjs', (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Error: ${error}`);
-    return;
-  }
-
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});
 
 app.get('/', async (req, res) => {
   const url = req.query.url;
