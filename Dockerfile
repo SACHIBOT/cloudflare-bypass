@@ -20,4 +20,4 @@ COPY . .
  
 RUN npm install --force 
 
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
