@@ -26,7 +26,7 @@ The image above shows an example of the Cloudflare verification process that thi
 2. **Install dependencies:**
 
    ```bash
-   npm install
+   npm install --force
    ```
 
 3. **Run the server:**
